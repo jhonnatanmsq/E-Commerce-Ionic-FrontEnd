@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/services/domain/categoria.service';
-import { CategoriaDTO } from 'src/models/categoria.dto';
+import { CategoriaService } from 'src/app/_services/domain/categoria.service';
+import { CategoriaDTO } from 'src/app/_models/categoria.dto';
 import {environment} from 'src/environments/environment';
 
 @Component({
@@ -24,9 +24,7 @@ export class CategoriasPage implements OnInit {
     .subscribe(res => {
       this.items = res;
     },
-    error => {
-      console.log(error)
-    });
+    error => {});
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { CategoriaDTO } from 'src/models/categoria.dto';
+import { CategoriaDTO } from 'src/app/_models/categoria.dto';
 
 @Injectable()
 export class CategoriaService {
