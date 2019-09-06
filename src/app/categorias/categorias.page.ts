@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from 'src/services/domain/categoria.service';
+import { CategoriaDTO } from 'src/models/categoria.dto';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-categorias',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriasPage implements OnInit {
 
-  constructor() { }
+  items: CategoriaDTO[];
+  bucketUrl : String = environment.bucketUrl;
+
+  constructor(private categoriaService : CategoriaService) { }
 
   ngOnInit() {
+    this.carregarCategorias();
+  }
+
+  carregarCategorias(){
+    this.categoriaService.findAll()
+    .subscribe(res => {
+      this.items = res;
+    },
+    error => {
+      console.log(error)
+    });
   }
 
 }
