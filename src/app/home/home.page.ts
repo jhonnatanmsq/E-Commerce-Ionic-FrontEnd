@@ -30,7 +30,6 @@ export class HomePage {
     this.auth.authenticate(this.creds)
       .subscribe(res => {
         this.auth.successfulLogin(res.headers.get('Authorization'))
-        
         this.router.navigate(['/categorias']);
       })
   }
