@@ -14,6 +14,7 @@ import { ErrorInterceptorProvider } from './_interceptors/error-interceptor';
 import { AuthService } from './_services/auth.service';
 import { StorageService } from './_services/storage.service';
 import { ClienteService } from './_services/domain/cliente.service';
+import { AuthInterceptorProvider } from './_interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { ClienteService } from './_services/domain/cliente.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
