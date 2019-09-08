@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { StorageService } from '../_services/storage.service';
 import { throwError } from 'rxjs';
 
+import * as alertify from 'alertifyjs';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
@@ -30,6 +31,12 @@ export class ErrorInterceptor implements HttpInterceptor{
                 case 403:
                     this.handle403();
                     break;
+                case 401:
+                    this.handle401();
+                    break;
+                default:
+                    this.handleDefault(errorObj);
+                    break
             }
 
             return throwError(errorObj);
@@ -39,6 +46,12 @@ export class ErrorInterceptor implements HttpInterceptor{
 
     handle403(){
         this.storage.setLocalUser(null);
+    }
+    handle401(){
+        alertify.error("E-mail ou Senha incorretos!")
+    }
+    handleDefault(errorObj){
+        alertify.error(`Erro ${errorObj.status}: ${errorObj.error}`)
     }
 }
 

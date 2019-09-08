@@ -4,6 +4,8 @@ import { MenuController } from '@ionic/angular';
 import { CredenciaisDTO } from '../_models/credenciais.dto';
 import { AuthService } from '../_services/auth.service';
 
+import * as alertify from 'alertifyjs';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -29,7 +31,8 @@ export class HomePage {
   login(){
     this.auth.authenticate(this.creds)
       .subscribe(res => {
-        this.auth.successfulLogin(res.headers.get('Authorization'))
+        this.auth.successfulLogin(res.headers.get('Authorization'));
+        alertify.success("Logado com sucesso!");
         this.router.navigate(['/categorias']);
       })
   }
