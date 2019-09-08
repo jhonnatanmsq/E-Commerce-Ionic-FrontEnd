@@ -20,6 +20,15 @@ export class HomePage {
 
   constructor(private router: Router, private menu : MenuController, private auth : AuthService) {}
 
+  ionViewDidEnter(){
+    this.auth.refreshToken()
+      .subscribe(res => {
+        this.auth.successfulLogin(res.headers.get('Authorization'));
+        alertify.success("Logado com sucesso!");
+        this.router.navigate(['/categorias']);
+      })
+  }
+
   ionViewWillEnter(){
     this.menu.enable(false);
   }
