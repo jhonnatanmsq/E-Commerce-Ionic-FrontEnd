@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './_services/auth.service';
+import { Router } from '@angular/router';
+
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
   public appPages = [
     {
       title: 'Profile',
@@ -26,7 +31,9 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private auth : AuthService,
+    private router : Router
   ) {
     this.initializeApp();
   }
@@ -36,5 +43,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  logout(){
+    this.router.navigate(['/home']);
+    this.auth.logout();
+    alertify.message("Até mais!");
   }
 }
