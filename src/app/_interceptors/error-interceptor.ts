@@ -6,6 +6,7 @@ import { StorageService } from '../_services/storage.service';
 import { throwError } from 'rxjs';
 
 import * as alertify from 'alertifyjs';
+import { FieldMessage } from '../_models/field_message';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
@@ -34,6 +35,9 @@ export class ErrorInterceptor implements HttpInterceptor{
                 case 401:
                     this.handle401();
                     break;
+                case 422:
+                    this.handle422(errorObj);
+                    break;
                 default:
                     this.handleDefault(errorObj);
                     break
@@ -48,10 +52,26 @@ export class ErrorInterceptor implements HttpInterceptor{
         this.storage.setLocalUser(null);
     }
     handle401(){
-        alertify.error("E-mail ou Senha incorretos!")
+        alertify.error("E-mail ou Senha incorretos!");
+    }
+    handle422(errorObj){
+        alertify.alert('Erro 422: Formulário Inválido', 
+                        this.listErrors(errorObj.errors), 
+                        function(){ 
+                            alertify.error('Corrija os campos e tente novamente'); 
+                        }   
+                      );
+
+    }
+    private listErrors(messages : FieldMessage[]) : String {
+        let s : String = '';
+        for (var i = 0; i < messages.length; i++){
+            s = s + '<p><strong>' + messages[i].fieldName + "</strong>: " + messages[i].message + "</p>" 
+        }
+        return s;
     }
     handleDefault(errorObj){
-        alertify.error(`Erro ${errorObj.status}: ${errorObj.error}`)
+        alertify.error(`Erro ${errorObj.status}: ${errorObj.error}`);
     }
 }
 

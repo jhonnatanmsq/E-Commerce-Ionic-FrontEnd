@@ -16,4 +16,8 @@ export class ClienteService {
     findByEmail(email : String) : Observable<ClienteDTO> {
         return this.http.get<ClienteDTO>(`${this.urlBase}/clientes/email?value=${email}`);
     }
+
+    insert(obj : ClienteDTO){
+        return this.http.post(`${this.urlBase}/clientes`,obj);
+    }
 }
