@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list *ngFor="let item of items">
-    <ion-item button>
+    <ion-item button (click)="showProdutos(item.id)">
         <ion-thumbnail slot="start">
           <img src="{{!item.img ? bucketUrl + '/sem-foto.png' : item.img}}">
         </ion-thumbnail>
