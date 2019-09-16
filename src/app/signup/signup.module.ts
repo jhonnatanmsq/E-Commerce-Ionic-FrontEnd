@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-
-import { SignupPage } from './signup.page';
+import { ComponentsModule } from '../components.module';
 import { CidadeService } from '../_services/domain/cidade.service';
 import { EstadoService } from '../_services/domain/estado.service';
+import { SignupPage } from './signup.page';
+
+
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SignupPage],
@@ -30,4 +32,4 @@ const routes: Routes = [
     EstadoService
   ]
 })
-export class SignupPageModule {}
+export class SignupPageModule { }

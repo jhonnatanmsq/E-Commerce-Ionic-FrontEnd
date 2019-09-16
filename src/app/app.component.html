@@ -14,17 +14,45 @@
               <ion-label>
                 {{p.title}}
               </ion-label>
-            </ion-item>            
+            </ion-item>
           </ion-menu-toggle>
-          <ion-item slots="end" (click)="logout()" [routerDirection]="'root'">
-            <ion-icon slot="start" name="log-out"></ion-icon>
-            <ion-label>
-              Logout
-            </ion-label>
-          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
+
+    <ion-menu side="end" menuId="login" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title *ngIf="!estaLogado()">Login</ion-title>
+          <ion-title *ngIf="estaLogado() && cliente">{{cliente.nome}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item *ngIf="!estaLogado()" [routerDirection]="'root'" [routerLink]="'/login'">
+            <ion-icon slot="start" name="log-in"></ion-icon>
+            <ion-label>Login</ion-label>
+          </ion-item>
+          <ion-item *ngIf="!estaLogado()" [routerDirection]="'root'" [routerLink]="'/signup'">
+            <ion-icon slot="start" name="create"></ion-icon>
+            <ion-label>Registre-se</ion-label>
+          </ion-item>
+          <ion-item *ngIf="estaLogado()" [routerDirection]="'root'" [routerLink]="'/profile'">
+            <ion-icon slot="start" name="contact"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+          <ion-footer>
+            <ion-item *ngIf="estaLogado()" slots="end" (click)="logout()" [routerDirection]="'root'">
+              <ion-icon slot="start" name="power"></ion-icon>
+              <ion-label>
+                Logout
+              </ion-label>
+            </ion-item>
+          </ion-footer>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

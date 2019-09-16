@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://msq-spring.herokuapp.com',
   bucketUrl: 'https://ec-spring-msq.s3-sa-east-1.amazonaws.com'
 };
 

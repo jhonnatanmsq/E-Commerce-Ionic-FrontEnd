@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/_services/domain/categoria.service';
-import { CategoriaDTO } from 'src/app/_models/categoria.dto';
-import {environment} from 'src/environments/environment';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
+import { CategoriaDTO } from 'src/app/_models/categoria.dto';
+import { CategoriaService } from 'src/app/_services/domain/categoria.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-categorias',
@@ -13,24 +12,24 @@ import { Router } from '@angular/router';
 export class CategoriasPage implements OnInit {
 
   items: CategoriaDTO[];
-  bucketUrl : String = environment.bucketUrl;
+  bucketUrl: String = environment.bucketUrl;
 
-  constructor(private categoriaService : CategoriaService, private router : Router) { }
+  constructor(private categoriaService: CategoriaService, private router: Router) { }
 
   ngOnInit() {
     this.carregarCategorias();
   }
 
-  carregarCategorias(){
+  carregarCategorias() {
     this.categoriaService.findAll()
-    .subscribe(res => {
-      this.items = res;
-    },
-    error => {});
+      .subscribe(res => {
+        this.items = res;
+      },
+        error => { });
   }
 
-  showProdutos(categoria_id : String){
-    this.router.navigate(['/produtos'], { queryParams: { categoria_id : categoria_id } })
+  showProdutos(categoria: String) {
+    this.router.navigate(['/produtos'], { queryParams: { categoria: categoria } })
   }
 
 }

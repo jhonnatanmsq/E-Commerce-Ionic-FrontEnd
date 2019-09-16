@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
-import { CredenciaisDTO } from '../_models/credenciais.dto';
-import { AuthService } from '../_services/auth.service';
+import { environment } from 'src/environments/environment';
+import { CategoriaDTO } from '../_models/categoria.dto';
+import { ProdutoDTO } from '../_models/produto.dto';
+import { CategoriaService } from '../_services/domain/categoria.service';
+import { ProdutoService } from '../_services/domain/produto.service';
 
-import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-home',
@@ -13,37 +14,41 @@ import * as alertify from 'alertifyjs';
 })
 export class HomePage {
 
-  creds : CredenciaisDTO = {
-    email : "",
-    senha : ""
+  produtos: ProdutoDTO[];
+  categorias: CategoriaDTO[];
+  bucketUrl: String = environment.bucketUrl;
+
+  constructor(private produtoService: ProdutoService,
+    private categoriaService: CategoriaService,
+    private router: Router) { }
+
+  ngOnInit() {
+    this.carregarHome();
   }
 
-  constructor(private router: Router, private menu : MenuController, private auth : AuthService) {}
-
-  ionViewDidEnter(){
-    this.auth.refreshToken()
+  carregarHome() {
+    this.produtoService.findAll(10)
       .subscribe(res => {
-        this.auth.successfulLogin(res.headers.get('Authorization'));
-        alertify.success("Logado com sucesso!");
-        this.router.navigate(['/categorias']);
+        this.produtos = res['content'];
+      },
+        error => { });
+
+    this.categoriaService.findAll()
+      .subscribe(res => {
+        this.categorias = res;
       })
   }
 
-  ionViewWillEnter(){
-    this.menu.enable(false);
+  showAllProdutos() {
+    this.router.navigate(['/produtos'])
   }
 
-  ionViewDidLeave(){
-    this.menu.enable(true);
+  showProdCat(id: Number) {
+    this.router.navigate(['/produtos'], { queryParams: { categoria: id } })
   }
 
-  login(){
-    this.auth.authenticate(this.creds)
-      .subscribe(res => {
-        this.auth.successfulLogin(res.headers.get('Authorization'));
-        alertify.success("Logado com sucesso!");
-        this.router.navigate(['/categorias']);
-      })
+  search(nome?: any) {
+    this.router.navigate(['/produtos'], { queryParams: { nome: nome.target.value } })
   }
 
 }

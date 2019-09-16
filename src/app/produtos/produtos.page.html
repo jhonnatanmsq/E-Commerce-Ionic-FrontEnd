@@ -1,21 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>produtos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-nav></app-nav>
+<ion-searchbar showCancelButton="focus" (input)="searchProd($event)"></ion-searchbar>
 <ion-content>
   <ion-list>
     <ion-item button *ngFor="let item of items">
       <ion-thumbnail slot="start">
-        <img src="{{!item.img ? bucketUrl + '/sem-foto.png' : item.img}}">
+        <img src="{{!item.imageUrl ? bucketUrl + '/sem-foto.png' : item.imageUrl}}">
       </ion-thumbnail>
-      <ion-label><strong><h2>{{item.nome}}</h2></strong></ion-label>
-      <p>{{item.preco | currency}}</p>
+      <ion-label>
+        <h1>{{item.nome}}</h1>
+        <p>{{item.preco | currency}}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
-
 </ion-content>

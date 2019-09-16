@@ -1,4 +1,4 @@
 export interface EstadoDTO {
-    id : String;
-    nome : String;
+    id: String;
+    nome: String;
 }

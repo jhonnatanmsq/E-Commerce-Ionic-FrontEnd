@@ -1,4 +1,4 @@
 export interface CidadeDTO {
-    id : String;
-    nome : String;
+    id: String;
+    nome: String;
 }

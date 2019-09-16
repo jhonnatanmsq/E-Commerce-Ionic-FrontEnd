@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>signup</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-nav></app-nav>
 
 <ion-content>
   <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
@@ -38,7 +31,7 @@
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="senha" type="password"></ion-input>
-    </ion-item> 
+    </ion-item>
     <ion-item>
       <ion-label stacked>Logradouro*</ion-label>
       <ion-input formControlName="logradouro" type="text"></ion-input>
@@ -74,7 +67,8 @@
     <ion-item>
       <ion-label stacked>Estado*</ion-label>
       <ion-select formControlName="estadoId" (ionChange)="updateCidades()">
-        <ion-select-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-select-option>
+        <ion-select-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>

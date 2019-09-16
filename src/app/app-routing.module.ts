@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'categorias', loadChildren: './categorias/categorias.module#CategoriasPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
-  { path: 'produtos', loadChildren: './produtos/produtos.module#ProdutosPageModule' }
+  { path: 'produtos', loadChildren: './produtos/produtos.module#ProdutosPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 
 @NgModule({
@@ -23,4 +24,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
