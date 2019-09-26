@@ -11,7 +11,7 @@ import { ProdutoService } from '../_services/domain/produto.service';
 })
 export class ProdutosPage implements OnInit {
 
-  items: ProdutoDTO[];
+  produtos: ProdutoDTO[];
 
   bucketUrl: String = environment.bucketUrl;
 
@@ -35,8 +35,7 @@ export class ProdutosPage implements OnInit {
 
     this.produtoService.findAll(this.lines, this.categoria, this.nome)
       .subscribe(res => {
-        console.log(res)
-        this.items = res['content'];
+        this.produtos = res['content'];
       }, error => { })
   }
 
@@ -46,9 +45,13 @@ export class ProdutosPage implements OnInit {
 
     this.produtoService.findAll(24, this.categoria, this.nome)
       .subscribe(res => {
-        this.items = res['content'];
+        this.produtos = res['content'];
         this.router.navigate(['/produtos'], { queryParams: { nome: this.nome } })
       }, error => { })
+  }
+
+  productEnter(id: Number){
+    this.router.navigate(['/produto/', id])
   }
 
 }

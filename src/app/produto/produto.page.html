@@ -1,0 +1,7 @@
+<app-nav></app-nav>
+
+<ion-content>
+  <img class="circle" [src]="produto?.imageUrl || bucketUrl + '/sem-foto.png'">
+  <h2 class="ion-text-center">{{produto?.nome}}</h2>
+  <p class="ion-text-center">{{produto?.preco  | currency}}</p>
+</ion-content>

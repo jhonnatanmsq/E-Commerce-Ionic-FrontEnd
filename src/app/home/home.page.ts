@@ -51,4 +51,8 @@ export class HomePage {
     this.router.navigate(['/produtos'], { queryParams: { nome: nome.target.value } })
   }
 
+  productEnter(id: Number){
+    this.router.navigate(['/produto/', id])
+  }
+
 }

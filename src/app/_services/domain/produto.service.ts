@@ -16,4 +16,8 @@ export class ProdutoService {
         return this.http.get(`${environment.apiUrl}/produtos/?categorias=${categorias}&nome=${nome}&lines=${lines}&orderBy=id`);
 
     }
+
+    findById(id: Number){
+        return this.http.get(`${environment.apiUrl}/produtos/${id}`);
+    }
 }

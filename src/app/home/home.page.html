@@ -6,7 +6,7 @@
   <div class="thumnails">
     <div class="list-thumbnail">
       <div class="img-thumb" *ngFor="let produto of produtos">
-        <ion-card button>
+        <ion-card button (click)="productEnter(produto.id)">
           <ion-card-header>
             <img src="{{!produto.imageUrl ? bucketUrl + '/sem-foto.png' : produto.imageUrl}}">
             <ion-card-title>{{produto.nome}}</ion-card-title>
